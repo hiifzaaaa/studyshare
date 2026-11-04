@@ -222,7 +222,11 @@ router.post('/', requireAuth, upload.single('file'), async (req, res) => {
           message: 'Please select a document to upload (PDF, Word, PPT, Image, ZIP).'
         });
       }
-      fileUrl = `/uploads/${req.file.filename}`;
+      if (req.file.path && (req.file.path.startsWith('http://') || req.file.path.startsWith('https://'))) {
+        fileUrl = req.file.path;
+      } else {
+        fileUrl = `/uploads/${req.file.filename}`;
+      }
       originalFilename = req.file.originalname;
       fileSize = req.file.size;
       fileType = req.file.mimetype;

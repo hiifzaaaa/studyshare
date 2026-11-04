@@ -16,7 +16,7 @@ import {
   AlertCircle,
   CheckCircle2
 } from 'lucide-react';
-import { fetchReviews, addReview, deleteReview } from '../services/api';
+import { fetchReviews, addReview, deleteReview, resolveFileUrl } from '../services/api';
 
 export default function ResourceModal({
   resource,
@@ -271,7 +271,7 @@ export default function ResourceModal({
               <div className="flex items-center justify-between text-slate-500">
                 <span>PDF Document Preview</span>
                 <a
-                  href={resource.fileUrl}
+                  href={resolveFileUrl(resource.fileUrl)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-indigo-600 hover:underline flex items-center gap-1 font-semibold"
@@ -282,7 +282,7 @@ export default function ResourceModal({
               </div>
               <div className="w-full h-80 rounded-xl border border-slate-200 overflow-hidden bg-slate-100">
                 <iframe
-                  src={resource.fileUrl}
+                  src={resolveFileUrl(resource.fileUrl)}
                   title="Document Preview"
                   className="w-full h-full"
                 />

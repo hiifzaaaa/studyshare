@@ -1,4 +1,14 @@
-const API_BASE = '/api';
+const RAW_BACKEND_URL = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
+const API_BASE = RAW_BACKEND_URL ? `${RAW_BACKEND_URL}/api` : '/api';
+
+export function resolveFileUrl(fileUrl) {
+  if (!fileUrl) return '';
+  if (fileUrl.startsWith('http://') || fileUrl.startsWith('https://')) {
+    return fileUrl;
+  }
+  const backendBase = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
+  return backendBase ? `${backendBase}${fileUrl}` : fileUrl;
+}
 
 function getAuthHeaders(isJson = true) {
   const token = localStorage.getItem('studyshare_token');

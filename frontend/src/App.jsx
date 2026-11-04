@@ -24,7 +24,8 @@ import {
   recordDownload,
   deleteResource,
   getCurrentUser,
-  logoutUser
+  logoutUser,
+  resolveFileUrl
 } from './services/api';
 import { 
   FileSearch, 
@@ -253,7 +254,7 @@ export default function App() {
 
       if (fileUrl) {
         const link = document.createElement('a');
-        link.href = fileUrl;
+        link.href = resolveFileUrl(fileUrl);
         link.download = filename || 'resource.pdf';
         link.target = '_blank';
         document.body.appendChild(link);

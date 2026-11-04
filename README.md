@@ -235,3 +235,74 @@ The project includes two pre-seeded, manually usable accounts created with hashe
 
 **Q4: How do you prevent duplicate ratings from the same student?**  
 *Answer:* In the `Review` Mongoose schema, we created a compound unique index on `{ user: 1, resource: 1 }`. If a student attempts to review the same resource twice, MongoDB rejects the second insert with error code 11000, and the API returns a 400 Bad Request error.
+
+---
+
+## 9. Cloud Deployment on Render (Production Guide)
+
+StudyShare is configured for deployment on [Render](https://render.com) using a two-service architecture:
+1. **Express Backend**: Render Web Service (`studyshare-backend`)
+2. **React Frontend**: Render Static Site (`studyshare-frontend`)
+
+### Option A: 1-Click Deployment via Render Blueprint (`render.yaml`)
+
+1. Fork or push this repository to GitHub: `https://github.com/hiifzaaaa/studyshare.git`
+2. Log into [Render Dashboard](https://dashboard.render.com).
+3. Click **New +** → **Blueprint**.
+4. Connect your GitHub repository `studyshare`.
+5. Render reads `render.yaml` automatically and configures both the backend and frontend services.
+6. Provide the environment variables:
+   - `MONGODB_URI`: Your MongoDB Atlas connection string.
+   - `JWT_SECRET`: Random secure string (Render can generate this automatically).
+   - `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`: (Optional/Recommended for persistent cloud storage).
+7. Click **Apply**. Both services will build and deploy!
+
+### Option B: Manual Service Creation on Render
+
+#### Step 1: Deploy Backend Web Service
+- **Service Type**: Web Service
+- **Repository**: `https://github.com/hiifzaaaa/studyshare`
+- **Root Directory**: `backend`
+- **Runtime**: `Node`
+- **Build Command**: `npm install`
+- **Start Command**: `npm start`
+- **Environment Variables**:
+  - `NODE_ENV` = `production`
+  - `PORT` = `10000`
+  - `MONGODB_URI` = `mongodb+srv://<user>:<password>@cluster0.mongodb.net/studyshare?retryWrites=true&w=majority`
+  - `JWT_SECRET` = `your_jwt_secret_key`
+  - `FRONTEND_URL` = `https://<your-frontend-subdomain>.onrender.com`
+  - *(Optional)* `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`
+
+#### Step 2: Deploy Frontend Static Site
+- **Service Type**: Static Site
+- **Repository**: `https://github.com/hiifzaaaa/studyshare`
+- **Root Directory**: `frontend`
+- **Build Command**: `npm install && npm run build`
+- **Publish Directory**: `dist`
+- **Rewrite Rule** (Required for React Router):
+  - **Source**: `/*`
+  - **Destination**: `/index.html`
+  - **Action**: `Rewrite`
+- **Environment Variables**:
+  - `VITE_API_URL` = `https://<your-backend-subdomain>.onrender.com`
+
+---
+
+## 10. External Cloud Services Setup
+
+### MongoDB Atlas Setup
+1. Create a free account at [mongodb.com/atlas](https://www.mongodb.com/atlas).
+2. Deploy a free **M0 Shared Cluster**.
+3. Under **Security → Network Access**, add IP `0.0.0.0/0` (Allow access from anywhere, required for Render dynamic IP ranges).
+4. Under **Security → Database Access**, create a user with read/write privileges.
+5. Under **Database → Connect → Drivers (Node.js)**, copy your connection string and replace `<password>` with your database user password.
+
+### Cloudinary Persistent Storage Setup (Free)
+1. Sign up for a free account at [cloudinary.com](https://cloudinary.com).
+2. From the Cloudinary Dashboard, copy your:
+   - **Cloud Name**
+   - **API Key**
+   - **API Secret**
+3. Add these to your backend environment variables on Render. Uploaded PDFs, notes, and study files will persist permanently in cloud storage.
+
