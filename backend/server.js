@@ -4,7 +4,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
-import { connectDB, getDbStatus } from './config/db.js';
+import { connectDB, getDbStatus, getDbDiagnostics } from './config/db.js';
 
 import authRoutes from './routes/auth.js';
 import resourceRoutes from './routes/resources.js';
@@ -67,15 +67,12 @@ app.use('/uploads', express.static(uploadsDir));
 
 // Root Endpoint - Display welcome & status when opened directly in a browser
 app.get('/', (req, res) => {
-  const dbStatus = getDbStatus();
+  const diag = getDbDiagnostics();
   res.json({
     status: 'ok',
     message: 'StudyShare REST API is running successfully',
     environment: process.env.NODE_ENV || 'development',
-    database: {
-      status: dbStatus,
-      connected: dbStatus === 'connected'
-    },
+    database: diag,
     version: '2.0.0',
     timestamp: new Date().toISOString(),
     endpoints: {
@@ -90,17 +87,14 @@ app.get('/', (req, res) => {
 
 // Health Check Endpoint
 app.get('/api/health', (req, res) => {
-  const dbStatus = getDbStatus();
-  const isOk = dbStatus === 'connected';
+  const diag = getDbDiagnostics();
+  const isOk = diag.connected;
   res.status(isOk ? 200 : 503).json({
     status: isOk ? 'ok' : 'degraded',
     message: isOk
       ? 'StudyShare backend is healthy and connected to MongoDB'
       : 'StudyShare backend is running, but MongoDB connection is currently unavailable',
-    database: {
-      status: dbStatus,
-      connected: isOk
-    },
+    database: diag,
     uptime: Math.round(process.uptime()),
     timestamp: new Date().toISOString()
   });

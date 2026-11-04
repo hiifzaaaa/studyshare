@@ -1,7 +1,12 @@
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import { User } from '../models/User.js';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'studyshare_jwt_secret_dev_key_2026';
+dotenv.config();
+
+function getJwtSecret() {
+  return process.env.JWT_SECRET || 'studyshare_jwt_secret_dev_key_2026';
+}
 
 export async function requireAuth(req, res, next) {
   try {
@@ -14,7 +19,7 @@ export async function requireAuth(req, res, next) {
     }
 
     const token = authHeader.split(' ')[1];
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, getJwtSecret());
 
     const user = await User.findById(decoded.id);
     if (!user) {
@@ -39,7 +44,7 @@ export async function optionalAuth(req, res, next) {
     const authHeader = req.headers.authorization;
     if (authHeader && authHeader.startsWith('Bearer ')) {
       const token = authHeader.split(' ')[1];
-      const decoded = jwt.verify(token, JWT_SECRET);
+      const decoded = jwt.verify(token, getJwtSecret());
       const user = await User.findById(decoded.id);
       if (user) {
         req.user = user;
@@ -59,7 +64,7 @@ export function generateToken(user) {
       email: user.email,
       role: user.role
     },
-    JWT_SECRET,
+    getJwtSecret(),
     { expiresIn: '7d' }
   );
 }
