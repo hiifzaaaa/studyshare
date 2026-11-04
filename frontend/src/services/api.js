@@ -1,8 +1,27 @@
-const rawEnvUrl = (import.meta.env.VITE_API_URL || '').trim().replace(/\/+$/, '');
-export const BACKEND_URL = rawEnvUrl
-  ? (rawEnvUrl.startsWith('http://') || rawEnvUrl.startsWith('https://') ? rawEnvUrl : `https://${rawEnvUrl}`)
-  : '';
-const API_BASE = BACKEND_URL ? `${BACKEND_URL}/api` : '/api';
+function getNormalizedBackendUrl() {
+  let url = (import.meta.env.VITE_API_URL || '').trim().replace(/\/+$/, '');
+  
+  // If running in production on onrender.com and no VITE_API_URL is supplied:
+  if (!url) {
+    if (typeof window !== 'undefined' && window.location.hostname.includes('onrender.com')) {
+      return 'https://studyshare-backend-l5v5.onrender.com';
+    }
+    return '';
+  }
+
+  // Remove leading protocol
+  let clean = url.replace(/^https?:\/\//i, '');
+
+  // If internal Render container name was passed (no domain dot, e.g. "studyshare-backend-l5v5")
+  if (!clean.includes('.')) {
+    clean = `${clean}.onrender.com`;
+  }
+
+  return `https://${clean}`;
+}
+
+export const BACKEND_URL = getNormalizedBackendUrl();
+export const API_BASE = BACKEND_URL ? `${BACKEND_URL}/api` : '/api';
 
 export function resolveFileUrl(fileUrl) {
   if (!fileUrl) return '';

@@ -36,4 +36,4 @@ services:
         destination: /index.html
     envVars:
       - key: VITE_API_URL
-        sync: false
+        value: https://studyshare-backend-l5v5.onrender.com
