@@ -1,0 +1,524 @@
+{
+  "departments": [
+    {
+      "code": "CSE",
+      "name": "Computer Science & Engineering",
+      "icon": "Laptop",
+      "subjects": [
+        "Data Structures & Algorithms",
+        "Database Management Systems",
+        "Operating Systems",
+        "Computer Networks",
+        "Theory of Computation",
+        "Compiler Design",
+        "Artificial Intelligence",
+        "Web Technologies",
+        "Software Engineering"
+      ]
+    },
+    {
+      "code": "AIDS",
+      "name": "AI & Data Science",
+      "icon": "Brain",
+      "subjects": [
+        "Machine Learning",
+        "Deep Learning",
+        "Data Mining & Warehousing",
+        "Natural Language Processing",
+        "Big Data Analytics",
+        "Mathematics for Data Science",
+        "Computer Vision"
+      ]
+    },
+    {
+      "code": "IT",
+      "name": "Information Technology",
+      "icon": "Globe",
+      "subjects": [
+        "Cloud Computing",
+        "Cyber Security",
+        "Full Stack Development",
+        "Information Storage & Management",
+        "Mobile App Development",
+        "DevOps & CI/CD"
+      ]
+    },
+    {
+      "code": "ECE",
+      "name": "Electronics & Communication",
+      "icon": "Cpu",
+      "subjects": [
+        "Digital Signal Processing",
+        "Signals & Systems",
+        "Microprocessors & Microcontrollers",
+        "VLSI Design",
+        "Analog Electronics",
+        "Communication Engineering"
+      ]
+    },
+    {
+      "code": "MECH",
+      "name": "Mechanical Engineering",
+      "icon": "Wrench",
+      "subjects": [
+        "Thermodynamics",
+        "Fluid Mechanics",
+        "Theory of Machines",
+        "Strength of Materials",
+        "Manufacturing Technology",
+        "Heat & Mass Transfer"
+      ]
+    },
+    {
+      "code": "CIVIL",
+      "name": "Civil Engineering",
+      "icon": "HardHat",
+      "subjects": [
+        "Structural Analysis",
+        "Geotechnical Engineering",
+        "Hydraulics & Fluid Mechanics",
+        "Surveying",
+        "Environmental Engineering",
+        "Concrete Technology"
+      ]
+    },
+    {
+      "code": "EE",
+      "name": "Electrical Engineering",
+      "icon": "Zap",
+      "subjects": [
+        "Power Systems",
+        "Control Systems",
+        "Electrical Machines",
+        "Power Electronics",
+        "Electromagnetic Fields",
+        "Circuit Theory"
+      ]
+    },
+    {
+      "code": "GEN",
+      "name": "First Year / Basic Sciences",
+      "icon": "BookOpen",
+      "subjects": [
+        "Engineering Mathematics I & II",
+        "Engineering Physics",
+        "Engineering Chemistry",
+        "Basic Electrical & Electronics",
+        "Programming in C",
+        "Engineering Graphics"
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "id": "res-001",
+      "title": "DSA Complete Handwritten Unit 1-5 Notes (Trees, Graphs, DP)",
+      "description": "Detailed handwritten revision notes covering Arrays, Linked Lists, Trees, Graph algorithms (Dijkstra, Prim, Kruskal), Dynamic Programming, and asymptotic notations with clean diagrams.",
+      "department": "CSE",
+      "semester": 3,
+      "subject": "Data Structures & Algorithms",
+      "category": "Notes",
+      "type": "file",
+      "fileUrl": "/uploads/dsa_handwritten_complete_notes.pdf",
+      "originalFilename": "DSA_Complete_Notes_Unit1_5.pdf",
+      "fileSize": 4280000,
+      "fileType": "application/pdf",
+      "academicYear": "2024-2025",
+      "examType": "End-Semester",
+      "tags": [
+        "Trees",
+        "Graphs",
+        "DP",
+        "Handwritten",
+        "Algorithms"
+      ],
+      "uploaderName": "Priya Nair",
+      "uploaderRole": "Student (CSE 3rd Year)",
+      "createdAt": "2026-10-15T10:30:00.000Z",
+      "downloads": 344,
+      "upvotes": 89,
+      "upvotedBy": [],
+      "ratings": [
+        {
+          "id": "r1",
+          "rating": 5,
+          "comment": "Hands down the best notes for Trees & Graph algorithms! Saved my mid-sems.",
+          "author": "Ananya S.",
+          "date": "2026-10-18T14:20:00.000Z"
+        },
+        {
+          "id": "r2",
+          "rating": 5,
+          "comment": "Clean diagrams and clear Big-O complexity tables.",
+          "author": "Kunal M.",
+          "date": "2026-10-22T09:15:00.000Z"
+        }
+      ],
+      "averageRating": 5,
+      "uploaderId": "usr-priya-02",
+      "uploaderEmail": "priya@college.edu"
+    },
+    {
+      "id": "res-002",
+      "title": "Operating Systems 5-Year Solved PYQs (2020-2025)",
+      "description": "Previous year question papers with model answers covering Process Synchronization, Banker's Algorithm, Page Replacement (FIFO, LRU, Optimal), Semaphore implementation, and Disk Scheduling.",
+      "department": "CSE",
+      "semester": 4,
+      "subject": "Operating Systems",
+      "category": "PYQ",
+      "type": "file",
+      "fileUrl": "/uploads/os_solved_pyq_2020_2025.pdf",
+      "originalFilename": "OS_PYQ_Solved_2020_2025.pdf",
+      "fileSize": 6150000,
+      "fileType": "application/pdf",
+      "academicYear": "2024-2025",
+      "examType": "End-Semester",
+      "tags": [
+        "PYQ",
+        "Solved",
+        "Deadlocks",
+        "Paging",
+        "Semaphores"
+      ],
+      "uploaderName": "Aarav Patel",
+      "uploaderRole": "Teaching Assistant",
+      "createdAt": "2026-09-28T14:15:00.000Z",
+      "downloads": 512,
+      "upvotes": 142,
+      "upvotedBy": [],
+      "ratings": [
+        {
+          "id": "r3",
+          "rating": 5,
+          "comment": "Almost 70% questions in our end-sem were directly from this booklet!",
+          "author": "Vikram R.",
+          "date": "2026-10-02T16:00:00.000Z"
+        },
+        {
+          "id": "r4",
+          "rating": 4,
+          "comment": "Very well structured, step by step Banker's algorithm solution.",
+          "author": "Neha D.",
+          "date": "2026-10-05T11:45:00.000Z"
+        }
+      ],
+      "averageRating": 4.8,
+      "uploaderId": "usr-student-03",
+      "uploaderEmail": "student@college.edu"
+    },
+    {
+      "id": "res-003",
+      "title": "DBMS Lab Manual with SQL Queries & Normalization Cheatsheet",
+      "description": "Complete lab manual containing all 12 experimental queries, PL/SQL procedures, triggers, cursor examples, BCNF/3NF decomposition exercises, and ER diagrams.",
+      "department": "CSE",
+      "semester": 4,
+      "subject": "Database Management Systems",
+      "category": "Lab",
+      "type": "file",
+      "fileUrl": "/uploads/dbms_lab_manual_queries.pdf",
+      "originalFilename": "DBMS_Lab_Manual_Full.pdf",
+      "fileSize": 2890000,
+      "fileType": "application/pdf",
+      "academicYear": "2024-2025",
+      "examType": "Lab-Viva",
+      "tags": [
+        "SQL",
+        "PL/SQL",
+        "Normalization",
+        "Triggers",
+        "Viva Questions"
+      ],
+      "uploaderName": "Rohan Verma",
+      "uploaderRole": "Lab Instructor",
+      "createdAt": "2026-09-12T08:00:00.000Z",
+      "downloads": 278,
+      "upvotes": 64,
+      "upvotedBy": [],
+      "ratings": [
+        {
+          "id": "r5",
+          "rating": 5,
+          "comment": "The viva questions at the end of each experiment helped me score full marks in external viva.",
+          "author": "Sneha G.",
+          "date": "2026-09-20T12:00:00.000Z"
+        }
+      ],
+      "averageRating": 5,
+      "uploaderId": "usr-rohan-01",
+      "uploaderEmail": "rohan@college.edu"
+    },
+    {
+      "id": "res-004",
+      "title": "Machine Learning Math & Algorithms Interactive Notes (Stanford CS229 Companion)",
+      "description": "Supervised and Unsupervised learning summary: Linear Regression, Logistic Regression, SVMs, PCA, K-Means, Neural Networks, plus intuitive loss gradient formulas.",
+      "department": "AIDS",
+      "semester": 5,
+      "subject": "Machine Learning",
+      "category": "Notes",
+      "type": "link",
+      "linkUrl": "https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-supervised-learning",
+      "originalFilename": "Stanford ML Cheatsheet",
+      "fileSize": 0,
+      "fileType": "external/link",
+      "academicYear": "2025-2026",
+      "examType": "Mid-Term",
+      "tags": [
+        "ML",
+        "Math",
+        "Supervised",
+        "Deep Learning",
+        "Stanford"
+      ],
+      "uploaderName": "Priya Nair",
+      "uploaderRole": "Faculty",
+      "createdAt": "2026-10-01T15:20:00.000Z",
+      "downloads": 419,
+      "upvotes": 110,
+      "upvotedBy": [],
+      "ratings": [
+        {
+          "id": "r6",
+          "rating": 5,
+          "comment": "Brilliant visual explanations of decision boundaries and cost functions.",
+          "author": "Tanya K.",
+          "date": "2026-10-10T18:30:00.000Z"
+        }
+      ],
+      "averageRating": 5,
+      "uploaderId": "usr-priya-02",
+      "uploaderEmail": "priya@college.edu"
+    },
+    {
+      "id": "res-005",
+      "title": "Engineering Mathematics II - Vector Calculus & Laplace Transforms",
+      "description": "Handwritten formula booklet and solved step-by-step examples on Gauss Divergence Theorem, Green's Theorem, Stokes' Theorem, and Inverse Laplace Transforms.",
+      "department": "GEN",
+      "semester": 2,
+      "subject": "Engineering Mathematics I & II",
+      "category": "Book",
+      "type": "file",
+      "fileUrl": "/uploads/engg_maths_laplace_vector.pdf",
+      "originalFilename": "Maths_II_Formulas_Solved.pdf",
+      "fileSize": 3750000,
+      "fileType": "application/pdf",
+      "academicYear": "2024-2025",
+      "examType": "End-Semester",
+      "tags": [
+        "Laplace",
+        "Vector Calculus",
+        "Formulas",
+        "First Year"
+      ],
+      "uploaderName": "Aarav Patel",
+      "uploaderRole": "Student",
+      "createdAt": "2026-08-14T11:00:00.000Z",
+      "downloads": 620,
+      "upvotes": 180,
+      "upvotedBy": [],
+      "ratings": [
+        {
+          "id": "r7",
+          "rating": 5,
+          "comment": "Lifesaver for 1st years! Every formula on one quick revision page.",
+          "author": "Manish P.",
+          "date": "2026-08-25T14:10:00.000Z"
+        }
+      ],
+      "averageRating": 5,
+      "uploaderId": "usr-student-03",
+      "uploaderEmail": "student@college.edu"
+    },
+    {
+      "id": "res-006",
+      "title": "Digital Signal Processing Mid-Term Question Papers & Solutions",
+      "description": "Detailed solved papers covering Discrete Fourier Transform (DFT), Fast Fourier Transform (FFT Decimation-in-Time & Frequency), IIR Filter design (Butterworth & Chebyshev).",
+      "department": "ECE",
+      "semester": 5,
+      "subject": "Digital Signal Processing",
+      "category": "PYQ",
+      "type": "file",
+      "fileUrl": "/uploads/dsp_midterm_pyq_solutions.pdf",
+      "originalFilename": "DSP_Midterm_PYQ_Solved.pdf",
+      "fileSize": 4500000,
+      "fileType": "application/pdf",
+      "academicYear": "2024-2025",
+      "examType": "Mid-Term",
+      "tags": [
+        "DSP",
+        "FFT",
+        "DFT",
+        "Butterworth",
+        "Solved"
+      ],
+      "uploaderName": "Rohan Verma",
+      "uploaderRole": "Student (ECE)",
+      "createdAt": "2026-10-05T09:40:00.000Z",
+      "downloads": 195,
+      "upvotes": 52,
+      "upvotedBy": [],
+      "ratings": [
+        {
+          "id": "r8",
+          "rating": 4,
+          "comment": "Butterfly diagram calculations are written neatly with intermediate steps.",
+          "author": "Divya N.",
+          "date": "2026-10-12T17:15:00.000Z"
+        }
+      ],
+      "averageRating": 4.5,
+      "uploaderId": "usr-rohan-01",
+      "uploaderEmail": "rohan@college.edu"
+    },
+    {
+      "id": "res-007",
+      "title": "Thermodynamics Cycle Diagrams & Steam Table Formula Sheets",
+      "description": "Rankine Cycle, Carnot Cycle, Otto and Diesel cycles with T-s and P-v diagrams, refrigeration cycle, and steam table interpolation notes.",
+      "department": "MECH",
+      "semester": 3,
+      "subject": "Thermodynamics",
+      "category": "Notes",
+      "type": "file",
+      "fileUrl": "/uploads/thermo_cycles_formula_sheet.pdf",
+      "originalFilename": "Thermodynamics_Cycles_Summary.pdf",
+      "fileSize": 3100000,
+      "fileType": "application/pdf",
+      "academicYear": "2024-2025",
+      "examType": "End-Semester",
+      "tags": [
+        "Rankine",
+        "Carnot",
+        "Steam Tables",
+        "P-V Diagrams"
+      ],
+      "uploaderName": "Priya Nair",
+      "uploaderRole": "Student (MECH)",
+      "createdAt": "2026-09-19T13:25:00.000Z",
+      "downloads": 167,
+      "upvotes": 43,
+      "upvotedBy": [],
+      "ratings": [
+        {
+          "id": "r9",
+          "rating": 5,
+          "comment": "Formulas are color-coded and easy to memorize for derivation questions.",
+          "author": "Arjun K.",
+          "date": "2026-09-29T10:05:00.000Z"
+        }
+      ],
+      "averageRating": 5,
+      "uploaderId": "usr-priya-02",
+      "uploaderEmail": "priya@college.edu"
+    },
+    {
+      "id": "res-008",
+      "title": "Computer Networks CCNA / Kurose-Ross Quick Reference Links & Packet Tracer Labs",
+      "description": "Interactive resource containing packet tracer topology files (.pkt), Subnetting cheatsheet, TCP/IP vs OSI model comparison, and routing protocols (OSPF, BGP, RIP).",
+      "department": "CSE",
+      "semester": 5,
+      "subject": "Computer Networks",
+      "category": "Link",
+      "type": "link",
+      "linkUrl": "https://www.geeksforgeeks.org/computer-network-tutorials/",
+      "originalFilename": "GeeksforGeeks CN Master Series",
+      "fileSize": 0,
+      "fileType": "external/link",
+      "academicYear": "2025-2026",
+      "examType": "End-Semester",
+      "tags": [
+        "Subnetting",
+        "TCP/IP",
+        "OSI",
+        "Packet Tracer",
+        "OSPF"
+      ],
+      "uploaderName": "Aarav Patel",
+      "uploaderRole": "Network Admin / Alumni",
+      "createdAt": "2026-10-20T16:00:00.000Z",
+      "downloads": 388,
+      "upvotes": 95,
+      "upvotedBy": [],
+      "ratings": [
+        {
+          "id": "r10",
+          "rating": 5,
+          "comment": "Subnetting calculations made so simple. Must bookmark for 5th sem!",
+          "author": "Farhan A.",
+          "date": "2026-10-24T19:30:00.000Z"
+        }
+      ],
+      "averageRating": 5,
+      "uploaderId": "usr-student-03",
+      "uploaderEmail": "student@college.edu"
+    }
+  ],
+  "requests": [
+    {
+      "id": "req-001",
+      "title": "Need 2024 End-Sem DAA Question Paper with Solved Solutions",
+      "department": "CSE",
+      "semester": 3,
+      "subject": "Data Structures & Algorithms",
+      "description": "Looking for the exact question paper asked in Nov 2024 exams, specifically the dynamic programming matrix chain multiplication problem.",
+      "urgency": "High",
+      "requesterName": "Tanmay Joshi",
+      "status": "Open",
+      "createdAt": "2026-11-01T08:30:00.000Z"
+    },
+    {
+      "id": "req-002",
+      "title": "Signals & Systems Unit 3 Convolution Integral handwritten solved examples",
+      "department": "ECE",
+      "semester": 4,
+      "subject": "Signals & Systems",
+      "description": "Need step-by-step graphical convolution solved problems for continuous time signals.",
+      "urgency": "Medium",
+      "requesterName": "Ritika Roy",
+      "status": "Open",
+      "createdAt": "2026-10-30T11:15:00.000Z"
+    },
+    {
+      "id": "req-003",
+      "title": "Cloud Computing AWS Architecture Lab Manual",
+      "department": "IT",
+      "semester": 6,
+      "subject": "Cloud Computing",
+      "description": "Looking for lab exercises covering EC2 setup, S3 bucket policy configuration, and Lambda trigger demos.",
+      "urgency": "Low",
+      "requesterName": "Sahil Mehta",
+      "status": "Fulfilled",
+      "createdAt": "2026-10-25T14:00:00.000Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "usr-rohan-01",
+      "name": "Rohan Verma",
+      "email": "rohan@college.edu",
+      "password": "password123",
+      "department": "CSE",
+      "semester": 3,
+      "role": "Student (CSE 3rd Year)",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "usr-priya-02",
+      "name": "Priya Nair",
+      "email": "priya@college.edu",
+      "password": "password123",
+      "department": "CSE",
+      "semester": 4,
+      "role": "Teaching Assistant",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "usr-student-03",
+      "name": "Aarav Patel",
+      "email": "student@college.edu",
+      "password": "password123",
+      "department": "AIDS",
+      "semester": 5,
+      "role": "Student (AI & DS)",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    }
+  ]
+}
