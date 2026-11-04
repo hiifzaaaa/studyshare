@@ -62,6 +62,34 @@ app.options('*', cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Live Request & Response Logger (Real-Time Terminal Demonstration)
+app.use((req, res, next) => {
+  const start = Date.now();
+  const { method, originalUrl } = req;
+
+  // Skip static asset spam in terminal
+  if (originalUrl.startsWith('/uploads/') && originalUrl.endsWith('.pdf')) {
+    return next();
+  }
+
+  const timeStr = new Date().toLocaleTimeString();
+  console.log(`\n📥 [HTTP REQ] ${method} ${originalUrl} (${timeStr})`);
+  if ((method === 'POST' || method === 'PUT') && req.body && Object.keys(req.body).length > 0) {
+    const sanitizedBody = { ...req.body };
+    if (sanitizedBody.password) sanitizedBody.password = '••••••••';
+    console.log(`   📦 Payload:`, JSON.stringify(sanitizedBody));
+  }
+
+  res.on('finish', () => {
+    const duration = Date.now() - start;
+    const status = res.statusCode;
+    const icon = status < 400 ? '✅' : '❌';
+    console.log(`📤 [HTTP RES] ${icon} ${method} ${originalUrl} -> HTTP ${status} [${duration}ms]`);
+  });
+
+  next();
+});
+
 // Serve uploaded study material files statically (for local disk storage fallback)
 app.use('/uploads', express.static(uploadsDir));
 
