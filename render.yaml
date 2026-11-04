@@ -22,14 +22,11 @@ services:
         sync: false
       - key: CLOUDINARY_API_SECRET
         sync: false
-      - key: FRONTEND_URL
-        fromStaticSite:
-          name: studyshare-frontend
-          property: url
 
   # 2. StudyShare React Frontend Static Site
-  - type: static
+  - type: web
     name: studyshare-frontend
+    runtime: static
     plan: free
     rootDir: frontend
     buildCommand: npm install && npm run build
