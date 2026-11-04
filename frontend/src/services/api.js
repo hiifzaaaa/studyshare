@@ -24,35 +24,73 @@ function getAuthHeaders(isJson = true) {
   return headers;
 }
 
+// Resilient API request wrapper with descriptive error reporting
+async function safeFetch(url, options = {}) {
+  let res;
+  try {
+    res = await fetch(url, options);
+  } catch (netErr) {
+    console.error(`[API Network Error] ${url}:`, netErr);
+    if (BACKEND_URL && !BACKEND_URL.includes('.')) {
+      throw new Error(
+        `Configuration Error: VITE_API_URL is set to internal hostname ("${BACKEND_URL}"). Please change VITE_API_URL in your Render Static Site Environment to your public backend URL (e.g. https://your-backend.onrender.com).`
+      );
+    }
+    throw new Error(
+      `Cannot connect to StudyShare backend (${API_BASE}). If Render free instance is waking up, please wait 30 seconds and try again.`
+    );
+  }
+
+  const contentType = res.headers.get('content-type') || '';
+  let data = null;
+
+  if (contentType.includes('application/json')) {
+    try {
+      data = await res.json();
+    } catch {
+      data = null;
+    }
+  } else {
+    if (res.status === 502 || res.status === 503) {
+      throw new Error('Backend service is starting up on Render. Please wait 30 seconds and retry.');
+    }
+    if (res.status === 404) {
+      throw new Error(`API endpoint not found on backend (${url}). Please check service deployment.`);
+    }
+  }
+
+  if (!res.ok) {
+    const errorMsg = data?.message || `Request failed with HTTP status ${res.status}`;
+    const err = new Error(errorMsg);
+    err.status = res.status;
+    err.data = data;
+    throw err;
+  }
+
+  return data;
+}
+
 // --- Auth APIs ---
 
 export async function loginUser(identifier, password) {
-  const res = await fetch(`${API_BASE}/auth/login`, {
+  const data = await safeFetch(`${API_BASE}/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ identifier, password })
   });
-  const data = await res.json();
-  if (!res.ok) {
-    throw new Error(data.message || 'Login failed. Please check credentials.');
-  }
-  if (data.token) {
+  if (data?.token) {
     localStorage.setItem('studyshare_token', data.token);
   }
   return data;
 }
 
 export async function registerUser(userData) {
-  const res = await fetch(`${API_BASE}/auth/register`, {
+  const data = await safeFetch(`${API_BASE}/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(userData)
   });
-  const data = await res.json();
-  if (!res.ok) {
-    throw new Error(data.message || 'Registration failed.');
-  }
-  if (data.token) {
+  if (data?.token) {
     localStorage.setItem('studyshare_token', data.token);
   }
   return data;
@@ -61,26 +99,25 @@ export async function registerUser(userData) {
 export async function getCurrentUser() {
   const token = localStorage.getItem('studyshare_token');
   if (!token) return null;
-  const res = await fetch(`${API_BASE}/auth/me`, {
-    headers: getAuthHeaders(true)
-  });
-  if (!res.ok) {
-    localStorage.removeItem('studyshare_token');
+  try {
+    const data = await safeFetch(`${API_BASE}/auth/me`, {
+      headers: getAuthHeaders(true)
+    });
+    return data?.user || null;
+  } catch (err) {
+    if (err.status === 401) {
+      localStorage.removeItem('studyshare_token');
+    }
     return null;
   }
-  const data = await res.json();
-  return data.user;
 }
 
 export async function updateProfile(profileData) {
-  const res = await fetch(`${API_BASE}/auth/profile`, {
+  return await safeFetch(`${API_BASE}/auth/profile`, {
     method: 'PUT',
     headers: getAuthHeaders(true),
     body: JSON.stringify(profileData)
   });
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.message || 'Profile update failed.');
-  return data;
 }
 
 export function logoutUser() {

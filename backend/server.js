@@ -4,7 +4,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
-import { connectDB } from './config/db.js';
+import { connectDB, getDbStatus } from './config/db.js';
 
 import authRoutes from './routes/auth.js';
 import resourceRoutes from './routes/resources.js';
@@ -38,25 +38,73 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: (origin, callback) => {
+    // Allow non-browser requests (e.g. server-to-server, curl, health probes)
     if (!origin || process.env.NODE_ENV !== 'production') {
       return callback(null, true);
     }
+    // Allow Render domains, Vercel domains, localhost, or FRONTEND_URL
     if (
-      allowedOrigins.includes(origin) ||
       origin.endsWith('.onrender.com') ||
-      origin.endsWith('.vercel.app')
+      origin.endsWith('.vercel.app') ||
+      origin.includes('localhost') ||
+      allowedOrigins.includes(origin)
     ) {
       return callback(null, true);
     }
     return callback(null, true);
   },
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin']
 }));
+app.options('*', cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve uploaded study material files statically (for local disk storage fallback)
 app.use('/uploads', express.static(uploadsDir));
+
+// Root Endpoint - Display welcome & status when opened directly in a browser
+app.get('/', (req, res) => {
+  const dbStatus = getDbStatus();
+  res.json({
+    status: 'ok',
+    message: 'StudyShare REST API is running successfully',
+    environment: process.env.NODE_ENV || 'development',
+    database: {
+      status: dbStatus,
+      connected: dbStatus === 'connected'
+    },
+    version: '2.0.0',
+    timestamp: new Date().toISOString(),
+    endpoints: {
+      health: '/api/health',
+      auth: '/api/auth',
+      resources: '/api/resources',
+      requests: '/api/requests',
+      stats: '/api/stats'
+    }
+  });
+});
+
+// Health Check Endpoint
+app.get('/api/health', (req, res) => {
+  const dbStatus = getDbStatus();
+  const isOk = dbStatus === 'connected';
+  res.status(isOk ? 200 : 503).json({
+    status: isOk ? 'ok' : 'degraded',
+    message: isOk
+      ? 'StudyShare backend is healthy and connected to MongoDB'
+      : 'StudyShare backend is running, but MongoDB connection is currently unavailable',
+    database: {
+      status: dbStatus,
+      connected: isOk
+    },
+    uptime: Math.round(process.uptime()),
+    timestamp: new Date().toISOString()
+  });
+});
 
 // --- API Route Mounting ---
 app.use('/api/auth', authRoutes);
@@ -65,17 +113,6 @@ app.use('/api/reviews', reviewRoutes);
 app.use('/api/bookmarks', bookmarkRoutes);
 app.use('/api/requests', requestRoutes);
 app.use('/api', statsRoutes);
-
-// Health Check
-app.get('/api/health', (req, res) => {
-  res.json({
-    status: 'ok',
-    service: 'StudyShare API',
-    database: 'MongoDB',
-    version: '2.0.0',
-    timestamp: new Date().toISOString()
-  });
-});
 
 // Centralized Error Handling Middleware
 app.use((err, req, res, next) => {

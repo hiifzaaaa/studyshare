@@ -130,9 +130,16 @@ export default function LoginPage({ onAuthSuccess, departments = [] }) {
 
           {/* Error Message */}
           {errorMsg && (
-            <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 shrink-0" />
-              <span>{errorMsg}</span>
+            <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-start gap-2">
+              <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-rose-500" />
+              <div className="space-y-1">
+                <span className="font-semibold block leading-tight">{errorMsg}</span>
+                {errorMsg.includes('waking up') && (
+                  <p className="text-[11px] text-rose-600">
+                    Free Render instances sleep when idle and take ~30–45s to wake up on the first visit.
+                  </p>
+                )}
+              </div>
             </div>
           )}
 

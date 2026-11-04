@@ -1,4 +1,5 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import { User } from '../models/User.js';
 import { requireAuth, generateToken } from '../middleware/auth.js';
 
@@ -7,6 +8,13 @@ const router = express.Router();
 // POST /api/auth/register
 router.post('/register', async (req, res) => {
   try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({
+        success: false,
+        message: 'Database connection is currently unavailable. Please verify MONGODB_URI on Render.'
+      });
+    }
+
     const { username, email, password, fullName, department, semester, role } = req.body;
 
     if (!username || !email || !password || !fullName) {
@@ -72,6 +80,13 @@ router.post('/register', async (req, res) => {
 // POST /api/auth/login
 router.post('/login', async (req, res) => {
   try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({
+        success: false,
+        message: 'Database connection is currently unavailable. Please verify MONGODB_URI on Render.'
+      });
+    }
+
     const { identifier, email, username, password } = req.body;
     const loginIdentifier = (identifier || email || username || '').trim().toLowerCase();
 
